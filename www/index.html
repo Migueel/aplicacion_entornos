@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Lanzamiento de dado</title>
+        <style>
+            body{
+                text-align: center;
+                background-image: url("img/fondo.jpg");  
+            }
+            
+            table{
+                margin:auto;
+            }
+            h1{
+                color:#fe00ff;
+            }
+            #tabla-vic{
+                background-image: url("img/table.jpg");
+                background-size: 100px 200px;
+
+            }
+            
+        </style>
+        <script type="text/javascript">
+        
+        var numero; 
+        var jug1 = parseInt(document.getElementById("jug1").value);
+        var jug2 = parseInt(document.getElementById("jug2").value);
+        var vic1 = 0;
+        var vic2 = 0;
+         
+        function lanzar(){
+
+            numero = Math.ceil(Math.random()*6); 
+            document.getElementById("imgdado").innerHTML = '<img src="img/'+numero+'.svg" width=300 height=300/>';
+        
+
+                if (numero == jug1) {
+                    vic1++;
+                    document.getElementById("vic1").innerHTML = (vic1);
+                    alert("gana 1");
+                }
+                
+                if (jug2 == numero) {
+                        vic2++;
+                        document.getElementById("vic2").innerHTML = (vic2);
+                        alert("gana 2");
+
+                }
+    
+            navigator.vibrate(100);        
+        }         
+        
+        function reset(){
+            numero = 0;
+            lanzamiento = 0;
+            vic1 = 0;
+            vic2 = 0;
+        } 
+
+        </script>
+    </head>
+    <body>
+        <h1>El Juego del Dado</h1><br>
+        <table>
+            <tr>
+                <td>
+                    Jugador 1: <input type="number" id="jug1">
+                </td>
+                <td>
+                    Jugador 2: <input type="number" id="jug2">
+                    <br>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div id="imgdado"><img src="img/dado.gif"  width="100" height="100"></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="button" value="Lanza el dado" onclick="lanzar()"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="button" value="Reset" onclick="reset()"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table id="tabla-vic" border = "1">
+                    <tr><td colspan="2">Victorias</td></tr>
+                    <tr><td>Jugador 1</td><td>Jugador 2</td></tr>
+                    <tr><td id="vic1">0</td><td id="vic2">0</td></tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>
